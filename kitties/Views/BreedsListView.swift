@@ -14,7 +14,14 @@ struct CatBreedListView: View {
     var body: some View {
         NavigationView{
             List(items, id: \.id) { item in
-                CatBreedRowView(item: item).padding(.vertical, 4)
+                ZStack {
+                    NavigationLink(destination: BreedDetailView(breed: item)){
+                        EmptyView()
+                    }.buttonStyle(PlainButtonStyle())
+                    CatBreedRowView(item: item).padding(.vertical, 4)
+                }
+                
+                
             }.navigationTitle("Breeds")
         }
         
