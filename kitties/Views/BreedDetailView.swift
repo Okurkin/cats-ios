@@ -21,7 +21,8 @@ struct BreedDetailView: View {
                 VStack(spacing: 16) {
                     makeImage(url: BreedImage.mock.url)
                     makeInfo(breed: self.breed)
-                    makeRating(breed: self.breed)
+                    makeAbilities(breed: self.breed)
+                    makeProperties(breed: self.breed)
                 }.navigationTitle(self.breed.name ?? "").navigationBarItems(trailing: HStack {
                     
                     if (self.breed.wikipediaUrl != nil)
@@ -60,7 +61,7 @@ private extension BreedDetailView{
 
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8) {
-                    makeInfoRow(title: !(breed.altNames.isEmpty) ? breed.altNames:breed.name, iconName: "creditcard")
+                    makeInfoRow(title: !(breed.altNames.isEmpty) ? breed.altNames:breed.name, iconName: "person.text.rectangle.fill")
                     makeInfoRow(title: breed.temperament, iconName: "person.fill.questionmark")
                     makeInfoRow(title: breed.getCountryCodeFlag(), iconName: "globe")
                     makeInfoRow(title: "\(breed.lifeSpan) years", iconName: "cross.fill")
@@ -73,33 +74,33 @@ private extension BreedDetailView{
         .padding(.horizontal, 8)
         
     }
-    func makeRating(breed: CatBreed) -> some View {
+    func makeAbilities(breed: CatBreed) -> some View {
         
         
         VStack(alignment: .leading, spacing: 8) {
-            Text("Ratings").font(.title2).fontWeight(.bold)
+            Text("Abilities").font(.title2).fontWeight(.bold)
 
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8) {
                     Group {
                         //                adaptability: 5,
                         
-                        self.makeRatingRow(title: "Adaptability", rating: breed.adaptability, iconName: "leaf.fill")
+                        self.makeRatingRow(title: "Adaptability", rating: breed.adaptability, iconName: "hands.sparkles.fill")
 
                         //                affectionLevel: 4,
                         self.makeRatingRow(title: "Affection", rating: breed.adaptability, iconName: "flame.fill")
                         //                childFriendly: 4,
                         self.makeRatingRow(title: "Child friendly", rating: breed.childFriendly, iconName: "figure.2.and.child.holdinghands")
                         //                dogFriendly: 4,
-                        self.makeRatingRow(title: "Dog friendly", rating: breed.dogFriendly, iconName: "tortoise.fill")
+                        self.makeRatingRow(title: "Dog friendly", rating: breed.dogFriendly, iconName: "pawprint.fill")
                         //                energyLevel: 3,
                         self.makeRatingRow(title: "Energy", rating: breed.energyLevel, iconName: "bolt.heart.fill")
                         //                grooming: 3,
-                        self.makeRatingRow(title: "Grooming", rating: breed.grooming, iconName: "drop.degreesign.fill")
+                        self.makeRatingRow(title: "Grooming", rating: breed.grooming, iconName: "shower.fill")
                         //                healthIssues: 1,
                         self.makeRatingRow(title: "Health issues", rating: breed.healthIssues, iconName: "cross.case.fill")
                         //                intelligence: 3,
-                        self.makeRatingRow(title: "Intelligence", rating: breed.intelligence, iconName: "brain.head.profile")
+                        self.makeRatingRow(title: "Intelligence", rating: breed.intelligence, iconName: "brain")
                         
                         //                sheddingLevel: 3,
                         self.makeRatingRow(title: "Shedding level", rating: breed.sheddingLevel, iconName: "brain.head.profile")
@@ -115,7 +116,43 @@ private extension BreedDetailView{
                         //                vocalisation: 3,
                         self.makeRatingRow(title: "Vocalisation", rating: breed.vocalisation, iconName: "person.wave.2.fill")
                     }
-                    
+                }
+                Spacer()
+            }
+        }
+        .padding(.horizontal, 8)
+    }
+    
+    func makeProperties(breed: CatBreed) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Properties").font(.title2).fontWeight(.bold)
+
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Group{
+                        
+            //                    indoor: 0,
+                        self.makeBooleanRow(title: "Indoor living", value: breed.indoor, iconName: "house.fill")
+            //                    lap: 0,
+                        self.makeBooleanRow(title: "Lap", value: breed.lap, iconName: "bed.double.fill")
+            //                    experimental: 0,
+                        self.makeBooleanRow(title: "Experimental", value: breed.experimental, iconName: "gear.badge.questionmark")
+            //                    hairless: 0,
+                        self.makeBooleanRow(title: "Hairless", value: breed.hairless, iconName: "camera.metering.none")
+            //                    natural: 0,
+                        self.makeBooleanRow(title: "Natural", value: breed.natural, iconName: "globe.europe.africa.fill")
+            //                    rare: 0,
+                        self.makeBooleanRow(title: "Rare", value: breed.rare, iconName: "sparkles")
+            //                    rex: 0,
+                        self.makeBooleanRow(title: "Rex", value: breed.rex, iconName: "laurel.leading")
+            //                    suppressedTail: 0,
+                        self.makeBooleanRow(title: "Supressed tail", value: breed.suppressedTail, iconName: "alternatingcurrent")
+            //                    shortLegs: 0,
+                        self.makeBooleanRow(title: "Short legs", value: breed.shortLegs, iconName: "shoeprints.fill")
+            //                    hypoallergenic: 0,
+                        self.makeBooleanRow(title: "Hypoallergenic", value: breed.hypoallergenic, iconName: "atom")
+                        
+                    }
                 }
                 Spacer()
             }
@@ -123,6 +160,18 @@ private extension BreedDetailView{
         .padding(.horizontal, 8)
         
     }
+    
+    func makeBooleanRow(title: String, value: Int, iconName: String) -> some View {
+        
+        HStack(alignment: .top, spacing: 8) {
+            let boolIconName = value != 0 ? "checkmark": "xmark"
+            Image(systemName: iconName)
+            Text("\(title):")
+            Image(systemName: boolIconName)
+        }
+        .font(.caption).fontWeight(.bold)
+    }
+        
     
     
     func makeRatingRow(title: String, rating: Int, iconName: String) -> some View {
