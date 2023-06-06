@@ -9,20 +9,39 @@ import Foundation
 import SwiftUI
 
 struct CatBreedListView: View {
-    let items: [CatBreed]  = CatBreed.mock// Pole datového modelu CatBreed
+    
+    @StateObject var viewModel = BreedsListViewModel()
+    
     
     var body: some View {
-        NavigationView{
-            List(items, id: \.id) { item in
-                ZStack {
-                    NavigationLink(destination: BreedDetailView(breed: item)){
-                        EmptyView()
-                    }.buttonStyle(PlainButtonStyle())
-                    CatBreedRowView(item: item).padding(.vertical, 4)
+        ZStack{
+            NavigationView{
+                
+                switch viewModel.state {
+                case .initial, .loading:
+                    ProgressView()
+                case .fetched:
+                        
+
+                    List(viewModel.items) { item in
+                        ZStack {
+                            NavigationLink(destination: BreedDetailView(breed: item)){
+                                EmptyView()
+                            }.buttonStyle(PlainButtonStyle()).opacity(0)
+                            CatBreedRowView(item: item).padding(.vertical, 4)
+                        }
+
+
+                    }.navigationTitle("Breeds")
+                    
+                case .failed:
+                    Text("Something went wrong 😕")
                 }
                 
-                
-            }.navigationTitle("Breeds")
+            }}.onAppear {
+            Task {
+                await viewModel.load()
+            }
         }
         
     }
@@ -44,7 +63,7 @@ struct CatBreedRowView: View {
             }.font(.title2).fontWeight(.bold)
             
             AsyncImage(
-                url: BreedImage.mock.url) { image in
+                url: URL(string: "ASD")) { image in
                     image
                         .resizable()
                         .frame(width: .infinity, height: 200)

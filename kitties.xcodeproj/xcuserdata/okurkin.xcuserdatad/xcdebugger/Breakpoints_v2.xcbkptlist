@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "5DF34D19-86CC-4797-A11C-9074D2F4D2BF"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C9081D7F-4BD8-494C-95D1-9DF9EA6DDCB2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/Views/BreedsListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "CatBreedRowView"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0B367A6-1A98-4AA0-A2FC-7A677BD2B8AE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/Models/BreedsListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "fetch()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F4B6509-2618-42AB-9F39-929A389F33F3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/API/APIManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "request(endpoint:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2F4B6509-2618-42AB-9F39-929A389F33F3 - 9abe94c205c3c0fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "1602">
+               </Location>
+               <Location
+                  uuid = "2F4B6509-2618-42AB-9F39-929A389F33F3 - 9abe94c205c3c11d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "1222">
+               </Location>
+               <Location
+                  uuid = "2F4B6509-2618-42AB-9F39-929A389F33F3 - 9abe94c205c3c11d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "1472">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0C7F24E-F97D-42AC-A627-A58837311447"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/API/APIManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "request(endpoint:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F0C7F24E-F97D-42AC-A627-A58837311447 - 2e1dcb9da1ba0a24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "218">
+               </Location>
+               <Location
+                  uuid = "F0C7F24E-F97D-42AC-A627-A58837311447 - adeb2815e40fab7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "F0C7F24E-F97D-42AC-A627-A58837311447 - 9abe94c205c3c622"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "173">
+               </Location>
+               <Location
+                  uuid = "F0C7F24E-F97D-42AC-A627-A58837311447 - bc890652d7f06021"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A48A1C66-D9D3-4CE4-ABC7-0ED8E230075B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/API/APIManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "request(endpoint:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A48A1C66-D9D3-4CE4-ABC7-0ED8E230075B - 9abe94c205c3c3d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "2646">
+               </Location>
+               <Location
+                  uuid = "A48A1C66-D9D3-4CE4-ABC7-0ED8E230075B - 9abe94c205c3c369"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "2875">
+               </Location>
+               <Location
+                  uuid = "A48A1C66-D9D3-4CE4-ABC7-0ED8E230075B - 9abe94c205c3c369"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "2959">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EE254B7F-BD79-4BE9-9352-AA75EBCCB118"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/API/APIManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "request(endpoint:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EE254B7F-BD79-4BE9-9352-AA75EBCCB118 - 9abe94c205c3c1c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "329">
+               </Location>
+               <Location
+                  uuid = "EE254B7F-BD79-4BE9-9352-AA75EBCCB118 - 9abe94c205c3c1c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.APIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(endpoint: kitties.Endpoint) async throws -&gt; &#x3c4;_0_0"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/API/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "343">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CA25D5CB-0D44-4A96-B6FC-46F08121225B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/Models/BreedsListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "fetch()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CA25D5CB-0D44-4A96-B6FC-46F08121225B - 6dcbb4872292025a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.BreedsListViewModel.fetch() async -&gt; ()"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/Models/BreedsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "2013">
+               </Location>
+               <Location
+                  uuid = "CA25D5CB-0D44-4A96-B6FC-46F08121225B - 6dcbb4872292027b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.BreedsListViewModel.fetch() async -&gt; ()"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/Models/BreedsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "2013">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "45685BBA-0859-4E96-B8EE-AF6C70807132"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kitties/Models/BreedsListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "fetch()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "45685BBA-0859-4E96-B8EE-AF6C70807132 - 6dcbb4872292023d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.BreedsListViewModel.fetch() async -&gt; ()"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/Models/BreedsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "1938">
+               </Location>
+               <Location
+                  uuid = "45685BBA-0859-4E96-B8EE-AF6C70807132 - 6dcbb48722920dde"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for kitties.BreedsListViewModel.fetch() async -&gt; ()"
+                  moduleName = "kitties"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/okurkin/Documents/kitties/kitties/Models/BreedsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "1938">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
