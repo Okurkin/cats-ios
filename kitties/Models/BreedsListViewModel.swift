@@ -23,8 +23,10 @@ import Foundation
     
     
     func load() async {
-        state = .loading
-        await fetch()
+        if(state != .fetched){
+            state = .loading
+            await fetch()
+        }
     }
     
     

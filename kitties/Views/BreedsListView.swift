@@ -28,14 +28,13 @@ struct CatBreedListView: View {
                             NavigationLink(destination: BreedDetailView(breed: item)){
                                 EmptyView()
                             }.buttonStyle(PlainButtonStyle()).opacity(0)
-                            CatBreedRowView(item: item).padding(.vertical, 4)
+                            CatBreedRowView(item: item)
                         }
-
 
                     }.navigationTitle("Breeds")
                     
                 case .failed:
-                    Text("Something went wrong 😕")
+                    Text("OOPS!! All cats are dead.. 😕 (JOKE, try it later)")
                 }
                 
             }}.onAppear {
@@ -61,22 +60,40 @@ struct CatBreedRowView: View {
                 Text(item.name)
                 Text(item.getCountryCodeFlag())
             }.font(.title2).fontWeight(.bold)
-            
-            AsyncImage(
-                url: URL(string: "ASD")) { image in
-                    image
-                        .resizable()
-                        .frame(width: .infinity, height: 200)
-                        .cornerRadius(8)
-                } placeholder: {
-                    ProgressView()
+            VStack {
+                if (item.image != nil)
+                {
+                    AsyncImage(
+                        url: URL(string: item.image!.url)) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 300, height: 200, alignment: .topLeading)
+                                .cornerRadius(8)
+                                .clipped()
+                                
+                        } placeholder: {
+                            ZStack{
+                                Spacer().padding(.bottom, 200)
+                                ProgressView()
+                            }
+                        }
                 }
+                else
+                {
+                    ZStack{
+                        Spacer().padding(.bottom, 200)
+                        Image(systemName: "questionmark.circle").resizable().scaledToFit().frame(height: 100)
+                    }
+                }
+            }
             
             Text(item.temperament)
                 .font(.caption).fontWeight(.semibold)
         }
     }
 }
+
 
 struct CatBreedListView_Previews: PreviewProvider {
     static var previews: some View {

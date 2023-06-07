@@ -19,18 +19,28 @@ struct BreedDetailView: View {
         ZStack(alignment: .topLeading) {
             ScrollView {
                 VStack(spacing: 16) {
-//                    makeImage(url: BreedImage.mock.url)
+                    if (self.breed.image != nil) {
+                        makeImage(url: URL(string:self.breed.image!.url))
+                    }
+                    else
+                    {
+                        ZStack{
+                            Spacer().padding(.bottom, 300)
+                            Image(systemName: "questionmark.circle").resizable().scaledToFit().frame(height: 150)
+                        }
+                    }
+                    
                     makeInfo(breed: self.breed)
                     makeAbilities(breed: self.breed)
                     makeProperties(breed: self.breed)
-                }.navigationTitle(self.breed.name ?? "").navigationBarItems(trailing: HStack {
+                }.navigationTitle(self.breed.name).navigationBarItems(trailing: HStack {
                     
                     if (self.breed.wikipediaURL != nil)
                     {
                         self.makeWikipediaButton()
                     }
                 })
-            }
+            }.padding(.horizontal, 8)
         }
     }
 }
@@ -43,9 +53,13 @@ private extension BreedDetailView {
                 .aspectRatio(contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
         } placeholder: {
-            ProgressView()
+            ZStack{
+                Spacer().padding(.bottom, 300)
+                ProgressView()
+
+            }
         }
-        .frame(maxWidth: .infinity)
+        .frame(width: .infinity)
     }
 }
 
@@ -76,7 +90,7 @@ private extension BreedDetailView{
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8) {
-                    makeInfoRow(title: ((breed.altNames?.isEmpty) == nil) ? breed.altNames!:breed.name, iconName: "person.text.rectangle.fill")
+                    makeInfoRow(title: (breed.altNames?.isEmpty == false) ? breed.altNames!:breed.name, iconName: "person.text.rectangle.fill")
                     makeInfoRow(title: breed.temperament, iconName: "person.fill.questionmark")
                     makeInfoRow(title: breed.getCountryCodeFlag(), iconName: "globe")
                     makeInfoRow(title: "\(breed.lifeSpan) years", iconName: "cross.fill")

@@ -39,6 +39,8 @@ struct CatBreed: Codable, Identifiable {
     let hypoallergenic: Int
     let referenceImageID: String?
     let catFriendly, bidability: Int?
+    
+    let image: BreedImage?
  
     enum CodingKeys: String, CodingKey {
         case weight, id, name
@@ -71,6 +73,7 @@ struct CatBreed: Codable, Identifiable {
         case referenceImageID = "reference_image_id"
         case catFriendly = "cat_friendly"
         case bidability
+        case image
     }
 }
  
