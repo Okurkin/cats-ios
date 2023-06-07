@@ -82,6 +82,14 @@ private extension BreedDetailView{
 
 
 private extension BreedDetailView{
+    
+    func concatenateStringsAndMakeList(string1: String, string2: String) -> String {
+        let parts = (string1 + ", " + string2).split(separator: ", ").map { String($0) }
+        let distinctParts = Array(Set(parts))
+
+        return distinctParts.joined(separator: ", ")
+    }
+    
     func makeInfo(breed: CatBreed) -> some View {
         
         
@@ -90,7 +98,7 @@ private extension BreedDetailView{
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8) {
-                    makeInfoRow(title: (breed.altNames?.isEmpty == false) ? breed.altNames!:breed.name, iconName: "person.text.rectangle.fill")
+                    makeInfoRow(title: concatenateStringsAndMakeList(string1: breed.name, string2: breed.altNames ?? ""), iconName: "person.text.rectangle.fill")
                     makeInfoRow(title: breed.temperament, iconName: "person.fill.questionmark")
                     makeInfoRow(title: breed.getCountryCodeFlag(), iconName: "globe")
                     makeInfoRow(title: "\(breed.lifeSpan) years", iconName: "cross.fill")
