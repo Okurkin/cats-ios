@@ -218,9 +218,9 @@
             filePath = "kitties/Views/BreedDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "fetchGallery()"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "makeWikipediaButton()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

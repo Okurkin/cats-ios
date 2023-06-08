@@ -90,21 +90,36 @@ private extension BreedDetailView {
     func makeGallery() -> some View {
         
         Group {
-            self.makeImage(url: URL(string: self.galleryImages[self.galleryIndex].url))
+            self.makeImage(url: URL(string: self.galleryImages[self.galleryIndex].url)).gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
+                .onEnded { value in
+                    let horizontalAmount = value.translation.width
+                    let verticalAmount = value.translation.height
+                    
+                    if abs(horizontalAmount) > abs(verticalAmount) {
+                        
+                        if(horizontalAmount < 0){
+//                            left swipe
+                            
+                            if(self.galleryIndex + 1 < self.galleryImages.count)
+                            {
+                                self.galleryIndex = self.galleryIndex + 1
+                            }
+                                
+                        }else {
+//                            right swipe
+                            if(self.galleryIndex - 1 >= 0)
+                            {
+                                self.galleryIndex = self.galleryIndex - 1
+                            }
+                        }
+                        
+                        print(horizontalAmount < 0 ? "left swipe" : "right swipe")
+                    }
+                })
             HStack {
                 ForEach(0..<self.galleryImages.count) { index in
                     
                     Circle().fill(self.galleryIndex == index ? Color.black : Color.gray).frame(width: 10, height: 10)
-                    
-                }
-            }.onAppear{
-                Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
-                    
-                    if self.galleryIndex + 1 == self.galleryImages.count {
-                        self.galleryIndex = 0
-                    }else {
-                        self.galleryIndex = self.galleryIndex + 1
-                    }
                     
                 }
             }
