@@ -8,27 +8,46 @@
 import SwiftUI
 import SafariServices
 
+
+
 struct BreedDetailView: View {
     
     let breed: CatBreed
-    
+        
     // whether or not to show the Safari ViewController
     @State var showSafari = false
     
+    
+    
+    // whether or not to show the ImageGallery
+    @State var showGallery = false
+    
+    @State var galleryImages: [BreedImage] = []
+    
+    @State var galleryIndex: Int = 0
+    
+    @ViewBuilder
     var body: some View {
         ZStack(alignment: .topLeading) {
             ScrollView {
                 VStack(spacing: 16) {
-                    if (self.breed.image != nil) {
-                        makeImage(url: URL(string:self.breed.image!.url))
-                    }
-                    else
-                    {
-                        ZStack{
-                            Spacer().padding(.bottom, 300)
-                            Image(systemName: "questionmark.circle").resizable().scaledToFit().frame(height: 150)
+                    
+                    switch showGallery {
+                    case false:
+                        if (self.breed.image != nil) {
+                            makeImage(url: URL(string:self.breed.image!.url))
                         }
+                        else
+                        {
+                            ZStack{
+                                Spacer().padding(.bottom, 300)
+                                Image(systemName: "questionmark.circle").resizable().scaledToFit().frame(height: 150)
+                            }
+                        }
+                    case true:
+                        self.makeGallery()
                     }
+                    
                     
                     makeInfo(breed: self.breed)
                     makeAbilities(breed: self.breed)
@@ -41,16 +60,22 @@ struct BreedDetailView: View {
                     }
                 })
             }.padding(.horizontal, 8)
+        }.onFirstAppear{
+            Task {
+                await fetchGallery()
+            }
+            
         }
     }
 }
 
 private extension BreedDetailView {
     func makeImage(url: URL?) -> some View {
+        
         AsyncImage(url: url) { image in
             image
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .clipShape(RoundedRectangle(cornerRadius: 8))
         } placeholder: {
             ZStack{
@@ -59,7 +84,31 @@ private extension BreedDetailView {
 
             }
         }
-        .frame(width: .infinity)
+        .frame(width: .infinity, height: 300)
+    }
+    
+    func makeGallery() -> some View {
+        
+        Group {
+            self.makeImage(url: URL(string: self.galleryImages[self.galleryIndex].url))
+            HStack {
+                ForEach(0..<self.galleryImages.count) { index in
+                    
+                    Circle().fill(self.galleryIndex == index ? Color.black : Color.gray).frame(width: 10, height: 10)
+                    
+                }
+            }.onAppear{
+                Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
+                    
+                    if self.galleryIndex + 1 == self.galleryImages.count {
+                        self.galleryIndex = 0
+                    }else {
+                        self.galleryIndex = self.galleryIndex + 1
+                    }
+                    
+                }
+            }
+        }
     }
 }
 
@@ -76,6 +125,63 @@ private extension BreedDetailView{
         .sheet(isPresented: $showSafari) {
             SafariView(url:URL(string:breed.wikipediaURL!)!)
         }
+        
+    }
+}
+
+
+private extension BreedDetailView {
+    func fetchGallery() async{
+        
+        do {
+            
+            let session: URLSession = {
+                let config = URLSessionConfiguration.default
+                config.timeoutIntervalForRequest = 30
+                
+                return URLSession(configuration: config)
+            }()
+            
+            let endpoint = ImagesEndpoint(breedId: breed.id)
+            
+            let request = try endpoint.asURLRequest()
+            
+            
+            let (data, response) = try await session.data(for: request)
+            
+            let httpResponse = response as? HTTPURLResponse
+            
+            debugPrint("Finished request: \(response)")
+                    
+            guard let status =  httpResponse?.statusCode, (200...299).contains(status) else {
+                throw APIError.unaceptableStatusCode
+            }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                let result = try decoder.decode([BreedImage].self, from: data)
+                self.galleryImages.append(contentsOf: result)
+                self.showGallery = true
+
+            } catch {
+                
+                print(error)
+            }
+
+
+        } catch {
+
+            if let error = error as? URLError, error.code == .cancelled {
+//              Logger.log("URL request was cancelled", .info)
+
+                return
+            }
+
+            debugPrint(error)
+            showGallery = false
+        }
+        
         
     }
 }
@@ -242,8 +348,8 @@ struct SafariView: UIViewControllerRepresentable {
     
 }
 
-//struct BreedDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BreedDetailView(breed: CatBreed.mock[0])
-//    }
-//}
+struct BreedDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        BreedDetailView(breed: CatBreed.mock[0])
+    }
+}

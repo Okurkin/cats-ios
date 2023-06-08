@@ -26,9 +26,6 @@ class APIManager: APIManaging {
         
         let (data, response) = try await session.data(for: request)
         
-        
-        print(String(data:data, encoding: String.Encoding.utf8))
-        
         let httpResponse = response as? HTTPURLResponse
         
         debugPrint("Finished request: \(response)")

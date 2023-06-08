@@ -34,7 +34,7 @@ import Foundation
         
         do {
             
-            var session: URLSession = {
+            let session: URLSession = {
                 let config = URLSessionConfiguration.default
                 config.timeoutIntervalForRequest = 30
                 
@@ -46,9 +46,6 @@ import Foundation
             let request = try endpoint.asURLRequest()
             
             let (data, response) = try await session.data(for: request)
-            
-            
-            print(String(data:data, encoding: String.Encoding.utf8))
             
             let httpResponse = response as? HTTPURLResponse
             
