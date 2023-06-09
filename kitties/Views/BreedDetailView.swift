@@ -160,7 +160,7 @@ private extension BreedDetailView{
                     
                     makeInfoRow(text: breed.description, iconName: "text.alignleft")
                     
-                    makeWeightRow(weight: breed.weight, iconName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
+                    makeWeightRow(weight: breed.weight, iconName: "scalemass.fill")
                     
                 }
                 Spacer()
@@ -184,8 +184,8 @@ private extension BreedDetailView{
             Image(systemName: iconName)
             VStack(alignment: .leading)
             {
-                Text("\(weight.metric) cm")
-                Text("\(weight.imperial) ft")
+                Text("\(weight.metric) kilograms")
+                Text("\(weight.imperial) pounds")
             }
             
         }
