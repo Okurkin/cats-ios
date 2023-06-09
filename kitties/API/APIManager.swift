@@ -37,13 +37,10 @@ class APIManager: APIManaging {
         let decoder = JSONDecoder()
         
         do {
-        let result = try decoder.decode(T.self, from: data)
+            let result = try decoder.decode(T.self, from: data)
 
             return result
         } catch {
-            
-            print(error)
-            
             throw APIError.decodingFailed(error: error)
         }
     }

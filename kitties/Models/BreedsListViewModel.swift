@@ -15,8 +15,6 @@ import Foundation
         case fetched
         case failed
     }
-
-    
     
     @Published var items: [CatBreed] = []
     @Published var state: State = .initial
@@ -34,55 +32,26 @@ import Foundation
         
         do {
             
-            let session: URLSession = {
-                let config = URLSessionConfiguration.default
-                config.timeoutIntervalForRequest = 30
-                
-                return URLSession(configuration: config)
-            }()
-            
             let endpoint = BreedsEndpoint()
             
-            let request = try endpoint.asURLRequest()
+            let response: [CatBreed] = try await APIManager().request(endpoint: endpoint)
             
-            let (data, response) = try await session.data(for: request)
+            self.items += response
             
-            let httpResponse = response as? HTTPURLResponse
-            
-            debugPrint("Finished request: \(response)")
-                    
-            guard let status =  httpResponse?.statusCode, (200...299).contains(status) else {
-                throw APIError.unaceptableStatusCode
-            }
-            
-            let decoder = JSONDecoder()
-            
-            do {
-                let result = try decoder.decode([CatBreed].self, from: data)
-                items = result
-
-            } catch {
-                
-                print(error)
-                
-                throw APIError.decodingFailed(error: error)
-            }
-
             state = .fetched
-
-
         } catch {
-
+            
             if let error = error as? URLError, error.code == .cancelled {
-//                Logger.log("URL request was cancelled", .info)
-
+                Logger.log("URL request was cancelled", .info)
+                
                 state = .fetched
-
+                
                 return
             }
-
+            
             debugPrint(error)
             state = .failed
         }
+        
     }
 }

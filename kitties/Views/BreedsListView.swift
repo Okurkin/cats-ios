@@ -24,7 +24,7 @@ struct BreedsListView: View {
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 12) {
                             ForEach(viewModel.items) { item in
-                                NavigationLink(destination: BreedDetailView(breed: item)) {
+                                NavigationLink(destination: BreedDetailView(breed: item, galleryViewModel: BreedDetailGalleryViewModel(breed_id: item.id))) {
                                     BreedRowView(item: item)
                                 }.buttonStyle(PlainButtonStyle())
                             }

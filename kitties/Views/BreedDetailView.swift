@@ -13,41 +13,30 @@ import SafariServices
 struct BreedDetailView: View {
     
     let breed: CatBreed
+    @StateObject var galleryViewModel: BreedDetailGalleryViewModel
+
         
     // whether or not to show the Safari ViewController
     @State var showSafari = false
-    
-    
-    
-    // whether or not to show the ImageGallery
-    @State var showGallery = false
-    
-    @State var galleryImages: [BreedImage] = []
-    
-    @State var galleryIndex: Int = 0
     
     @ViewBuilder
     var body: some View {
         ZStack(alignment: .topLeading) {
             ScrollView {
-                VStack(spacing: 16) {
+                LazyVStack(spacing: 16) {
                     
-                    switch showGallery {
-                    case false:
+                    switch galleryViewModel.state {
+                    case .initial, .loading, .failed:
                         if (self.breed.image != nil) {
                             makeImage(url: URL(string:self.breed.image!.url))
                         }
                         else
                         {
-                            ZStack{
-                                Spacer().padding(.bottom, 300)
-                                Image(systemName: "questionmark.circle").resizable().scaledToFit().frame(height: 150)
-                            }
+                            makeImagePlaceholder()
                         }
-                    case true:
+                    case .fetched:
                         self.makeGallery()
                     }
-                    
                     
                     makeInfo(breed: self.breed)
                     makeAbilities(breed: self.breed)
@@ -62,7 +51,7 @@ struct BreedDetailView: View {
             }.padding(.horizontal, 8)
         }.onFirstAppear{
             Task {
-                await fetchGallery()
+                await galleryViewModel.fetch()
             }
             
         }
@@ -70,6 +59,14 @@ struct BreedDetailView: View {
 }
 
 private extension BreedDetailView {
+    
+    func makeImagePlaceholder() -> some View {
+        ZStack{
+            Spacer().padding(.bottom, 300)
+            Image(systemName: "questionmark.circle").resizable().scaledToFit().frame(height: 150)
+        }
+    }
+    
     func makeImage(url: URL?) -> some View {
         
         AsyncImage(url: url) { image in
@@ -84,42 +81,37 @@ private extension BreedDetailView {
 
             }
         }
-        .frame(width: .infinity, height: 300)
+        .frame(height: 300).padding(.horizontal, 8)
     }
     
     func makeGallery() -> some View {
         
         Group {
-            self.makeImage(url: URL(string: self.galleryImages[self.galleryIndex].url)).gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
+            self.makeImage(url: URL(string: self.galleryViewModel.photos[self.galleryViewModel.currentShownPhotoIndex].url))
+                .gesture(DragGesture(minimumDistance: 5, coordinateSpace: .global)
                 .onEnded { value in
                     let horizontalAmount = value.translation.width
                     let verticalAmount = value.translation.height
-                    
+
                     if abs(horizontalAmount) > abs(verticalAmount) {
-                        
+
                         if(horizontalAmount < 0){
 //                            left swipe
-                            
-                            if(self.galleryIndex + 1 < self.galleryImages.count)
-                            {
-                                self.galleryIndex = self.galleryIndex + 1
-                            }
-                                
+
+                            self.galleryViewModel.showNextPhoto()
+
                         }else {
 //                            right swipe
-                            if(self.galleryIndex - 1 >= 0)
-                            {
-                                self.galleryIndex = self.galleryIndex - 1
-                            }
+                            self.galleryViewModel.showPreviousPhoto()
                         }
-                        
+
                         print(horizontalAmount < 0 ? "left swipe" : "right swipe")
                     }
                 })
             HStack {
-                ForEach(0..<self.galleryImages.count) { index in
+                ForEach(0..<self.galleryViewModel.photos.count) { index in
                     
-                    Circle().fill(self.galleryIndex == index ? Color.black : Color.gray).frame(width: 10, height: 10)
+                    Circle().fill(self.galleryViewModel.currentShownPhotoIndex == index ? Color.black : Color.gray).frame(width: 10, height: 10)
                     
                 }
             }
@@ -144,64 +136,6 @@ private extension BreedDetailView{
     }
 }
 
-
-private extension BreedDetailView {
-    func fetchGallery() async{
-        
-        do {
-            
-            let session: URLSession = {
-                let config = URLSessionConfiguration.default
-                config.timeoutIntervalForRequest = 30
-                
-                return URLSession(configuration: config)
-            }()
-            
-            let endpoint = ImagesEndpoint(breedId: breed.id)
-            
-            let request = try endpoint.asURLRequest()
-            
-            
-            let (data, response) = try await session.data(for: request)
-            
-            let httpResponse = response as? HTTPURLResponse
-            
-            debugPrint("Finished request: \(response)")
-                    
-            guard let status =  httpResponse?.statusCode, (200...299).contains(status) else {
-                throw APIError.unaceptableStatusCode
-            }
-            
-            let decoder = JSONDecoder()
-            
-            do {
-                let result = try decoder.decode([BreedImage].self, from: data)
-                self.galleryImages.append(contentsOf: result)
-                self.showGallery = true
-
-            } catch {
-                
-                print(error)
-            }
-
-
-        } catch {
-
-            if let error = error as? URLError, error.code == .cancelled {
-//              Logger.log("URL request was cancelled", .info)
-
-                return
-            }
-
-            debugPrint(error)
-            showGallery = false
-        }
-        
-        
-    }
-}
-
-
 private extension BreedDetailView{
     
     func concatenateStringsAndMakeList(string1: String, string2: String) -> String {
@@ -219,12 +153,15 @@ private extension BreedDetailView{
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8) {
-                    makeInfoRow(title: concatenateStringsAndMakeList(string1: breed.name, string2: breed.altNames ?? ""), iconName: "person.text.rectangle.fill")
-                    makeInfoRow(title: breed.temperament, iconName: "person.fill.questionmark")
-                    makeInfoRow(title: breed.getCountryCodeFlag(), iconName: "globe")
-                    makeInfoRow(title: "\(breed.lifeSpan) years", iconName: "cross.fill")
+                    makeInfoRow(text: concatenateStringsAndMakeList(string1: breed.name, string2: breed.altNames ?? ""), iconName: "person.text.rectangle.fill")
+                    makeInfoRow(text: breed.temperament, iconName: "person.fill.questionmark")
+                    makeInfoRow(text: breed.getCountryCodeFlag(), iconName: "globe")
+                    makeInfoRow(text: "\(breed.lifeSpan) years", iconName: "cross.fill")
                     
-                    makeInfoRow(title: breed.description, iconName: "text.alignleft")
+                    makeInfoRow(text: breed.description, iconName: "text.alignleft")
+                    
+                    makeWeightRow(weight: breed.weight, iconName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
+                    
                 }
                 Spacer()
             }
@@ -232,15 +169,30 @@ private extension BreedDetailView{
         .padding(.horizontal, 8)
         
     }
-    func makeInfoRow(title: String, iconName: String) -> some View {
+    func makeInfoRow(text: String, iconName: String) -> some View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: iconName)
             
-            Text(title)
+            Text(text)
         }
         .font(.caption)
         .fontWeight(.bold)
     }
+    
+    func makeWeightRow(weight: Weight, iconName: String) -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            Image(systemName: iconName)
+            VStack(alignment: .leading)
+            {
+                Text("\(weight.metric) cm")
+                Text("\(weight.imperial) ft")
+            }
+            
+        }
+        .font(.caption)
+        .fontWeight(.bold)
+    }
+    
     func makeRatingRow(title: String, rating: Int, iconName: String) -> some View {
         
         
@@ -317,6 +269,8 @@ private extension BreedDetailView{
                         self.makeRatingRow(title: "Child friendly", rating: breed.childFriendly, iconName: "figure.2.and.child.holdinghands")
                         //                dogFriendly: 4,
                         self.makeRatingRow(title: "Dog friendly", rating: breed.dogFriendly, iconName: "pawprint.fill")
+                        //                catFriendly: 4,
+                        
                         //                energyLevel: 3,
                         self.makeRatingRow(title: "Energy", rating: breed.energyLevel, iconName: "bolt.heart.fill")
                         //                grooming: 3,
@@ -365,6 +319,6 @@ struct SafariView: UIViewControllerRepresentable {
 
 struct BreedDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BreedDetailView(breed: CatBreed.mock[0])
+        BreedDetailView(breed: CatBreed.mock[0], galleryViewModel: BreedDetailGalleryViewModel(breed_id: CatBreed.mock[0].id))
     }
 }
